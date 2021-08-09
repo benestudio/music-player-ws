@@ -23,10 +23,9 @@ export const stop = () => PianoPlayerModule.stop();
 
 export const addOnNoteChangeListener = (listener: OnNoteChangeListener) => {
   if (!listeners.length) {
-    eventSubscription = eventEmitter.addListener(
-      'noteChange',
-      onNoteChangeListenerInternal,
-    );
+    // TODO 4B: add event listener to the emitter, set it to eventSubscription
+    // eventType: noteChange
+    // check the methods above to find the callback function
   }
   listeners.push(listener);
 };
@@ -34,6 +33,6 @@ export const addOnNoteChangeListener = (listener: OnNoteChangeListener) => {
 export const removeOnNoteChangeListener = (listener: OnNoteChangeListener) => {
   listeners = listeners.filter(l => l !== listener);
   if (!listeners.length) {
-    eventSubscription!.remove();
+    // TODO 4C: remove eventSubscription
   }
 };

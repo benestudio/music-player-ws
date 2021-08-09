@@ -7,10 +7,8 @@ const usePlayer = () => {
   const [currentBeat, setCurrentBeat] = useState<number | null>(null);
   const [isPlaying, setPlaying] = useState(false);
 
-  useEffect(() => {
-    PianoPlayer.addOnNoteChangeListener(setCurrentBeat);
-    return () => PianoPlayer.removeOnNoteChangeListener(setCurrentBeat);
-  }, []);
+  // TODO 4A: add listener from PianoPlayer which are removed on unmount
+  // Those will set the current beat
 
   const play = async (notes: number[][], tempo = DEFAULT_TEMPO) => {
     setPlaying(true);

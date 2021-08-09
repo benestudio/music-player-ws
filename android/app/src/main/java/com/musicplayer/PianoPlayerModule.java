@@ -51,11 +51,12 @@ public class PianoPlayerModule extends ReactContextBaseJavaModule implements Pia
         sendOnNoteChangeEvent(beatIndex);
     }
 
+    // TODO 4D: add the last part of the chain and emit the event
     private void sendOnNoteChangeEvent(int beat) {
         WritableMap params = Arguments.createMap();
         params.putInt("num", beat);
         getReactApplicationContext()
                 .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                .emit("noteChange", params);
+                // your code comes here
     }
 }

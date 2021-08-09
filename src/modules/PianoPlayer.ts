@@ -16,7 +16,7 @@ const onNoteChangeListenerInternal = ({ num }: { num: number }) => {
   listeners.forEach(listener => listener(num));
 };
 
-export const play = (notes: number[][], tempo = 120) =>
+export const play = (notes: number[][], tempo = 120): Promise<null> =>
   PianoPlayerModule.play(notes, tempo);
 
 export const stop = () => PianoPlayerModule.stop();

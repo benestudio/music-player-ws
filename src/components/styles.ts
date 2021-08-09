@@ -44,6 +44,7 @@ export default StyleSheet.create({
     height: 70,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: "space-between"
   },
   icon: {
     width: 40,
@@ -53,7 +54,6 @@ export default StyleSheet.create({
     padding: 4,
   },
   sides: {
-    flex: 1,
     flexDirection: 'row',
     alignContent: 'center',
   },

@@ -5,7 +5,8 @@ import * as PianoPlayer from '../modules/PianoPlayer';
 
 const usePlayer = () => {
   const [currentBeat, setCurrentBeat] = useState<number | null>(null);
-  const [isPlaying, setPlaying] = useState(false);
+  // TODO 2A: create isPlaying state
+  const isPlaying = false;
 
   useEffect(() => {
     PianoPlayer.addOnNoteChangeListener(setCurrentBeat);
@@ -13,15 +14,12 @@ const usePlayer = () => {
   }, []);
 
   const play = async (notes: number[][], tempo = DEFAULT_TEMPO) => {
-    setPlaying(true);
-    await PianoPlayer.play(notes, tempo);
-    setPlaying(false);
+    // TODO 2B: start the PianoPlayer (use await)
     setCurrentBeat(null);
   };
 
   const stop = () => {
-    PianoPlayer.stop();
-    setPlaying(false);
+    // TODO 2C: stop the PianoPlayer
     setCurrentBeat(null);
   };
 

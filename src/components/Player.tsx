@@ -48,6 +48,7 @@ const Player = () => {
     scrollTo(scrollViewRef, scroll.value, 0, false);
   });
 
+  // TODO 1A: find a place for this method to use.
   const togglePlayback = () => {
     if (isPlaying) {
       scroll.value = scroll.value;
@@ -103,33 +104,14 @@ const Player = () => {
         scrollEnabled={!isPlaying}
         onContentSizeChange={setContentWidth}
         showsHorizontalScrollIndicator={false}>
-        {notes.map((bar, barIndex) => (
-          <View style={styles.bar} key={barIndex}>
-            {bar.map((_beat, beatIndex) => (
-              <View style={styles.beat} key={beatIndex}>
-                {Array.from({
-                  length: NOTES_IN_OCTAVE * TOTAL_OCTAVES + 1,
-                }).map((_pitch, pitchIndex) => (
-                  <Note
-                    key={pitchIndex}
-                    onPress={handleToggleNote}
-                    barIndex={barIndex}
-                    beatIndex={beatIndex}
-                    pitchIndex={pitchIndex}
-                    notes={notes}
-                    isPlaying={isPlaying}
-                    currentBeat={currentBeat}
-                    colorIndex={pitchIndex % (NOTES_IN_OCTAVE + 1)}
-                  />
-                ))}
-              </View>
-            ))}
-          </View>
-        ))}
+        {/* TODO 1B: Mapping of notes
+            Create bars (map from notes), beats, pitches (use Array.from: NOTES_IN_OCTAVE * TOTAL_OCTAVES + 1)
+            Use styles: bar, beat
+            Use Note component (for colorIndex use  pitchIndex % (NOTES_IN_OCTAVE + 1))
+        */}
       </Animated.ScrollView>
       <Controllers
         isPlaying={isPlaying}
-        togglePlayback={togglePlayback}
         setTempo={setTempo}
         tempo={tempo}
       />

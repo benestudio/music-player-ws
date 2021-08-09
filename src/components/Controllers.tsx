@@ -7,14 +7,12 @@ import Icon from './Icon';
 import styles from './styles';
 
 interface IControllersProps {
-  togglePlayback: () => void;
   isPlaying: boolean;
   setTempo: (tempo: number) => void;
   tempo: number;
 }
 
 const Controllers = ({
-  togglePlayback,
   isPlaying,
   tempo,
   setTempo,
@@ -37,7 +35,7 @@ const Controllers = ({
       ]}>
       <View style={[styles.controller]}>
         <View style={styles.sides}>
-          <TouchableOpacity style={styles.button} onPress={togglePlayback}>
+          <TouchableOpacity style={styles.button}>
             <Icon name={isPlaying ? Images.Stop : Images.Play} />
           </TouchableOpacity>
         </View>

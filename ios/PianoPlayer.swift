@@ -6,24 +6,6 @@ class PianoPlayer {
   var sounds: [String: AVAudioPlayer] = [:]
   var pianoPlayerDelegate: PianoPlayerDelegate?
   
-  init() {
-    loadSounds()
-  }
-  
-  func loadSounds() {
-    do {
-      for index in 0...14 {
-        let key = "piano\(index)"
-        let path = Bundle.main.path(forResource: "\(key).mp3", ofType:nil)!
-        let url = URL(fileURLWithPath: path)
-        let player = try AVAudioPlayer(contentsOf: url)
-        sounds[key] = player
-      }
-    } catch {
-      // no-op
-    }
-  }
-  
   func play(beats: [[Int]], tempo: Int) {
     stop();
     let noteDuration: Double = 60.0 / Double(tempo)
@@ -57,7 +39,7 @@ class PianoPlayer {
         self?.playNotes(notes: notes, beat: beat)
       }
       let endTimer = Timer.scheduledTimer(withTimeInterval: endTime, repeats: false) { [weak self] _ in
-        self?.stopNotes(notes: notes)
+        self?.stopNotes(notes: notes, beat: beat)
       }
       self?.timers.append(startTimer)
       self?.timers.append(endTimer)
@@ -67,19 +49,22 @@ class PianoPlayer {
   func playNotes(notes: [Int], beat: Int) {
     pianoPlayerDelegate?.onNoteChange(num: beat)
     for note in notes {
-      let key = "piano\(note)"
-      guard let sound = self.sounds[key] else {
-        continue;
+      let resource = "piano\(note).mp3"
+      let path = Bundle.main.path(forResource: resource, ofType:nil)!
+      let url = URL(fileURLWithPath: path)
+      let key = "\(beat)-\(note)"
+      do {
+        self.sounds[key] = try AVAudioPlayer(contentsOf: url)
+        self.sounds[key]!.play()
+      } catch {
+        print("couldn't find resource: \(resource)")
       }
-      sound.stop()
-      self.sounds[key] = try! AVAudioPlayer(contentsOf: sound.url!)
-      self.sounds[key]!.play()
     }
   }
   
-  func stopNotes(notes: [Int]) {
+  func stopNotes(notes: [Int], beat: Int) {
     for note in notes {
-      let key = "piano\(note)"
+      let key = "\(beat)-\(note)"
       guard let sound = self.sounds[key] else {
         continue;
       }

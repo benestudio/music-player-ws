@@ -30,11 +30,9 @@ public class PianoPlayerModule extends ReactContextBaseJavaModule implements Pia
     // TODO: 3B: write method to play on player
     // the extra last argument is the promise, set it
     // check type conversation: https://reactnative.dev/docs/native-modules-android#argument-types
-    @ReactMethod
     // function comes here
 
     // TODO 3C: write stop method
-    @ReactMethod
     // function comes here
 
     @Override

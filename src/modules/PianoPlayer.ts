@@ -18,8 +18,6 @@ const onNoteChangeListenerInternal = ({ num }: { num: number }) => {
 
 // TODO: 3A write the start and stop function which calls the native modules
 
-export const stop = () => PianoPlayerModule.stop();
-
 export const addOnNoteChangeListener = (listener: OnNoteChangeListener) => {
   if (!listeners.length) {
     eventSubscription = eventEmitter.addListener(

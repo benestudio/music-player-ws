@@ -7,7 +7,7 @@ import {
 type OnNoteChangeListener = (num: number) => void;
 
 const { PianoPlayerModule } = NativeModules;
-const eventEmitter = new NativeEventEmitter(PianoPlayerModule);
+// const eventEmitter = new NativeEventEmitter(PianoPlayerModule);
 
 let listeners: OnNoteChangeListener[] = [];
 let eventSubscription: EmitterSubscription;
@@ -23,10 +23,10 @@ export const stop = () => PianoPlayerModule.stop();
 
 export const addOnNoteChangeListener = (listener: OnNoteChangeListener) => {
   if (!listeners.length) {
-    eventSubscription = eventEmitter.addListener(
+    /* eventSubscription = eventEmitter.addListener(
       'noteChange',
       onNoteChangeListenerInternal,
-    );
+    ); */
   }
   listeners.push(listener);
 };
@@ -34,6 +34,6 @@ export const addOnNoteChangeListener = (listener: OnNoteChangeListener) => {
 export const removeOnNoteChangeListener = (listener: OnNoteChangeListener) => {
   listeners = listeners.filter(l => l !== listener);
   if (!listeners.length) {
-    eventSubscription!.remove();
+    // eventSubscription!.remove();
   }
 };

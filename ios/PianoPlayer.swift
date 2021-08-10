@@ -31,7 +31,12 @@ class PianoPlayer {
     }
   }
   
-  func scheduleNotes(notes: [Int], noteDuration: Double, beat: Int) {
+  func setDelegate(delegate: PianoPlayerDelegate?) -> PianoPlayer {
+    pianoPlayerDelegate = delegate
+    return self
+  }
+  
+  private func scheduleNotes(notes: [Int], noteDuration: Double, beat: Int) {
     let startTime = Double(beat) * noteDuration
     let endTime = startTime + noteDuration + 0.1
     DispatchQueue.main.async { [weak self] in
@@ -46,7 +51,7 @@ class PianoPlayer {
     }
   }
   
-  func playNotes(notes: [Int], beat: Int) {
+  private func playNotes(notes: [Int], beat: Int) {
     pianoPlayerDelegate?.onNoteChange(num: beat)
     for note in notes {
       let resource = "piano\(note).mp3"
@@ -62,7 +67,7 @@ class PianoPlayer {
     }
   }
   
-  func stopNotes(notes: [Int], beat: Int) {
+  private func stopNotes(notes: [Int], beat: Int) {
     for note in notes {
       let key = "\(beat)-\(note)"
       guard let sound = self.sounds[key] else {
@@ -70,11 +75,6 @@ class PianoPlayer {
       }
       sound.stop()
     }
-  }
-  
-  func setDelegate(delegate: PianoPlayerDelegate?) -> PianoPlayer {
-    pianoPlayerDelegate = delegate
-    return self
   }
 }
 
